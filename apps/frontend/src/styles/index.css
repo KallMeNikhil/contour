@@ -1,0 +1,179 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-shell: #10141c;
+  --bg-shell-raised: #171d28;
+  --shell-border: rgb(255 255 255 / 0.07);
+  --shell-text: #eef1f6;
+  --shell-text-muted: #8c94a6;
+
+  --bg-canvas: #eceef2;
+  --bg-canvas-texture: rgb(16 20 28 / 0.035);
+  --canvas-vignette: rgb(16 20 28 / 0.05);
+
+  --bg-surface: #ffffff;
+  --bg-surface-raised: #fbfbfd;
+  --bg-surface-elevated: #ffffff;
+  --bg-surface-hover: #f1f2f6;
+  --bg-column: #f4f5f8;
+
+  --column-divider: #e2e4ec;
+  --column-header-rule: #d6d9e2;
+
+  --text-primary: #161a23;
+  --text-secondary: #545b6b;
+  --text-muted: #8a90a0;
+
+  --border-default: #dfe2ea;
+  --border-strong: #c3c8d4;
+
+  --accent: #1e6b6f;
+  --accent-hover: #175457;
+  --accent-foreground: #f3faf9;
+  --accent-soft: rgb(30 107 111 / 0.12);
+
+  --trail: #2f5fa8;
+  --trail-hover: #25497f;
+  --trail-foreground: #eef5fb;
+
+  --success: #2f7d57;
+  --warning: #d97706;
+  --error: #b24638;
+  --info: #2f6a8f;
+
+  --selected-bg: rgb(30 107 111 / 0.12);
+  --focus-ring: rgb(30 107 111 / 0.55);
+
+  --disabled-bg: #eceef2;
+  --disabled-text: #a6abb8;
+
+  --label-clay: #a8524f;
+  --label-moss: #4f7a5c;
+  --label-ochre: #a8527e;
+  --label-slate: #45647f;
+  --label-plum: #7a5a88;
+  --label-stone: #6f7586;
+
+  --shadow-xs: 0 1px 2px rgb(12 14 20 / 0.06);
+  --shadow-sm: 0 2px 6px rgb(12 14 20 / 0.07);
+  --shadow-md: 0 8px 20px rgb(12 14 20 / 0.1);
+  --shadow-lg: 0 20px 48px rgb(12 14 20 / 0.16);
+  --shadow-dragged: 0 16px 34px rgb(12 14 20 / 0.22);
+
+  --duration-micro: 120ms;
+  --duration-panel: 180ms;
+  --duration-settle: 220ms;
+  --ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-micro: 0ms;
+    --duration-panel: 0ms;
+    --duration-settle: 0ms;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family:
+    'Inter',
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-display {
+  font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
+  font-optical-sizing: auto;
+}
+
+.font-data {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.bg-contour-canvas {
+  background-color: var(--bg-canvas);
+  background-image:
+    radial-gradient(circle at 12% 0%, var(--canvas-vignette), transparent 40%),
+    radial-gradient(circle at 88% 100%, var(--canvas-vignette), transparent 44%),
+    repeating-radial-gradient(
+      circle at 14% 10%,
+      transparent 0px,
+      transparent 40px,
+      var(--bg-canvas-texture) 41px,
+      transparent 42px,
+      transparent 92px
+    ),
+    repeating-radial-gradient(
+      circle at 86% 84%,
+      transparent 0px,
+      transparent 54px,
+      var(--bg-canvas-texture) 55px,
+      transparent 56px,
+      transparent 120px
+    );
+  background-attachment: fixed;
+}
+
+.bg-shell-gradient {
+  background-image: linear-gradient(165deg, var(--bg-shell-raised) 0%, var(--bg-shell) 100%);
+}
+
+.bg-shell-well {
+  background-color: var(--bg-canvas);
+  background-image: linear-gradient(180deg, rgb(16 20 28 / 0.05) 0%, transparent 64px);
+}
+
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+.animate-skeleton {
+  animation: skeleton-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in-up {
+  animation: fade-in-up var(--duration-panel) var(--ease-settle);
+}

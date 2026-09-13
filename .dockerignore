@@ -1,0 +1,40 @@
+# Docker build context excludes for the Contour monorepo.
+# Keep this in sync with .gitignore's intent, but this file only controls
+# what's sent to the Docker daemon as build context - it does not affect
+# bind mounts at runtime (docker-compose.yml mounts the full repo for dev
+# hot-reload regardless of what's listed here).
+
+# Dependencies - always reinstalled inside the image for a clean, reproducible
+# build; a host node_modules (if one exists) must never leak into the image.
+node_modules
+**/node_modules
+
+# Build output - rebuilt inside the image; stale host dist/ would otherwise
+# shadow what the Dockerfile actually compiles.
+dist
+**/dist
+**/*.tsbuildinfo
+
+# Test/coverage output - irrelevant to the runtime image.
+coverage
+**/coverage
+
+# VCS / editor / OS noise.
+.git
+.github
+.vscode
+.idea
+.DS_Store
+*.log
+npm-debug.log*
+
+# Secrets - never baked into an image layer. .env.example files are fine
+# and intentionally NOT excluded.
+.env
+.env.local
+*.local
+**/.env
+**/.env.local
+
+# Docs aren't needed inside the image.
+docs

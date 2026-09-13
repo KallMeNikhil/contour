@@ -1,0 +1,6 @@
+{
+  "buildCommand": "npm run build --workspace=packages/shared && npm run build --workspace=apps/frontend",
+  "installCommand": "npm install",
+  "outputDirectory": "apps/frontend/dist",
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}
