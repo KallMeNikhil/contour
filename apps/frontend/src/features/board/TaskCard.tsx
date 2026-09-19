@@ -28,6 +28,9 @@ interface TaskCardProps {
   style?: CSSProperties;
 
   dragHandleProps?: HTMLAttributes<HTMLButtonElement>;
+
+  /** Extra class names appended to the card's root element. */
+  className?: string;
 }
 
 const MAX_VISIBLE_LABELS = 3;
@@ -51,6 +54,7 @@ export const TaskCard = forwardRef<HTMLDivElement, TaskCardProps>(function TaskC
     isPending = false,
     style,
     dragHandleProps,
+    className = '',
   },
   ref,
 ) {
@@ -77,7 +81,7 @@ export const TaskCard = forwardRef<HTMLDivElement, TaskCardProps>(function TaskC
         isSelected
           ? 'border-accent bg-selected shadow-sm'
           : 'border-border-default hover:-translate-y-px hover:border-border-strong hover:shadow-sm'
-      } ${isDragging ? 'rotate-1 opacity-90' : ''} ${isPending ? 'opacity-70' : ''}`}
+      } ${isDragging ? 'rotate-1 opacity-90' : ''} ${isPending ? 'opacity-70' : ''} ${className}`}
     >
       <div className="flex items-start gap-1">
         {canDrag && (

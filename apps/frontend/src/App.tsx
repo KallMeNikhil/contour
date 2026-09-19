@@ -11,10 +11,19 @@ import { WorkspacesPage } from './pages/WorkspacesPage';
 import { WorkspaceBoardsPage } from './pages/WorkspaceBoardsPage';
 import { BoardPage } from './pages/BoardPage';
 import { AcceptInvitePage } from './pages/AcceptInvitePage';
+import { HomePage } from './pages/HomePage';
 
 function RootRedirect() {
   const { isAuthenticated } = useAuth();
   return <Navigate to={isAuthenticated ? '/workspaces' : '/login'} replace />;
+}
+
+function RootRoute() {
+  const { isAuthenticated } = useAuth();
+  if (isAuthenticated) {
+    return <Navigate to="/workspaces" replace />;
+  }
+  return <HomePage />;
 }
 
 function AppRoutes() {
@@ -54,7 +63,7 @@ function AppRoutes() {
           </ProtectedRoute>
         }
       />
-      <Route path="/" element={<RootRedirect />} />
+      <Route path="/" element={<RootRoute />} />
       <Route path="*" element={<RootRedirect />} />
     </Routes>
   );
